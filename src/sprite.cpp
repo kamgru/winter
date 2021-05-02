@@ -2,21 +2,40 @@
 
 using namespace winter;
 
-sprite::sprite(std::shared_ptr<texture2d> tex_ptr, glm::vec2 size)
-    : m_tex_ptr(tex_ptr) {
-    m_quad.scale(size);
-    m_program.attach_shader_file(SHADER_TYPE_VERTEX, "../assets/shaders/unlit.vert");
-    m_program.attach_shader_file(SHADER_TYPE_FRAGMENT, "../assets/shaders/unlit.frag");
+void create_uv_rect(
+        rect &uv_rect,
+        rect const &src_rect,
+        std::shared_ptr<texture2d> const &tex_ptr){
+
+    glm::vec2 tex_size = tex_ptr->size();
+    uv_rect = {
+            (float)src_rect.x / tex_size.x,
+            (float)src_rect.y / tex_size.y,
+            (float)src_rect.w / tex_size.x,
+            (float)src_rect.h / tex_size.y
+    };
 }
 
-sprite::~sprite() = default;
+sprite::sprite(std::shared_ptr<texture2d> tex_ptr, winter::rect src)
+    : m_src_rect(src), m_tex_ptr(tex_ptr) {
+    texture(tex_ptr);
+}
 
-void sprite::draw(camera cam, glm::vec2 pos) {
-    m_quad.translate(pos);
-    m_tex_ptr->use();
-    m_program.use();
-    m_program.set_uniform_mat4("u_model", m_quad.model());
-    m_program.set_uniform_mat4("u_view", cam.view());
-    m_program.set_uniform_mat4("u_projection", cam.projection());
-    m_quad.draw();
+std::shared_ptr<texture2d> sprite::texture() {
+    return m_tex_ptr;
+}
+
+rect sprite::src_rect() {
+    return m_src_rect;
+}
+
+void sprite::texture(std::shared_ptr<texture2d> tex_ptr) {
+    m_tex_ptr = tex_ptr;
+    if (tex_ptr) {
+        create_uv_rect(m_uv_rect, m_src_rect, tex_ptr);
+    }
+}
+
+rect sprite::uv_rect() {
+    return m_uv_rect;
 }

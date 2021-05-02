@@ -19,6 +19,7 @@ void texture2d::use() const {
 
 void texture2d::from_file(const std::string& filename) {
     int channels;
+    stbi_set_flip_vertically_on_load(true);
     raw_texture_data_t data = stbi_load(filename.c_str(), &m_width, &m_height, &channels, 0);
     if (data){
         glGenTextures(1, &m_id);

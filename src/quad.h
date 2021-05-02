@@ -2,6 +2,7 @@
 #define WINTER_QUAD_H
 
 #include <glm/glm.hpp>
+#include <vector>
 
 typedef unsigned int vao_id;
 typedef unsigned int vbo_id;
@@ -16,6 +17,7 @@ namespace winter {
         void scale(glm::vec2 scale);
         void translate(glm::vec2 translation);
         glm::mat4 model();
+        void uvs(std::vector<float> uvs);
     private:
         vao_id m_vao;
         vbo_id m_vbo;
