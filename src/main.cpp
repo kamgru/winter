@@ -2,7 +2,6 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "window.h"
-#include "quad.h"
 #include "shader_program.h"
 #include "texture2d.h"
 #include "camera.h"
