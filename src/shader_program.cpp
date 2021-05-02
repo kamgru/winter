@@ -41,7 +41,7 @@ void print_compile_err(shader_id id){
     std::cout << "Error compiling shader:\n" << info_log << std::endl;
 }
 
-void shader_program::attach_shader_file(SHADER_TYPE shader_type, std::string filename) {
+void shader_program::attach_shader_file(SHADER_TYPE shader_type, std::string filename) const {
     std::string shader_src = file_io::read_all_text(filename);
     const char* src = shader_src.c_str();
 
@@ -66,11 +66,11 @@ void shader_program::attach_shader_file(SHADER_TYPE shader_type, std::string fil
     }
 }
 
-void shader_program::use() {
+void shader_program::use() const {
     glUseProgram(m_program_id);
 }
 
-void shader_program::set_uniform_mat4(std::string name, glm::mat4 mat) {
+void shader_program::set_uniform_mat4(std::string name, glm::mat4 mat) const {
     int location = glGetUniformLocation(m_program_id, name.c_str());
     if (location >= 0){
         glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(mat));

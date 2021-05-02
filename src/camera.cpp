@@ -16,9 +16,7 @@ camera::camera(int window_width, int window_height)
     m_projection = glm::ortho(0.0f, m_width, 0.0f, m_height, 0.1f, 100.0f);
 }
 
-camera::~camera() {
-
-}
+camera::~camera() = default;
 
 glm::mat4 camera::view() {
     return m_view;

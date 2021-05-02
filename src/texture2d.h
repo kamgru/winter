@@ -13,8 +13,8 @@ namespace winter {
     public:
         texture2d();
         ~texture2d();
-        void from_file(std::string filename);
-        void use();
+        void from_file(const std::string& filename);
+        void use() const;
         glm::vec2 size() { return glm::vec2(m_width, m_height); };
     private:
         texture_id_t m_id;

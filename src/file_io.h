@@ -6,7 +6,7 @@
 namespace winter {
     class file_io {
     public:
-        static std::string read_all_text(std::string filename);
+        static std::string read_all_text(const std::string& filename);
     };
 }
 

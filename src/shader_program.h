@@ -18,9 +18,9 @@ namespace winter {
     public:
         shader_program();
         ~shader_program();
-        void attach_shader_file(SHADER_TYPE shader_type, std::string filename);
-        void set_uniform_mat4(std::string name, glm::mat4 mat);
-        void use();
+        void attach_shader_file(SHADER_TYPE shader_type, std::string filename) const;
+        void set_uniform_mat4(std::string name, glm::mat4 mat) const;
+        void use() const;
     private:
         program_id m_program_id;
     };

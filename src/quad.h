@@ -12,7 +12,7 @@ namespace winter {
     public:
         quad();
         ~quad();
-        void draw();
+        void draw() const;
         void scale(glm::vec2 scale);
         void translate(glm::vec2 translation);
         glm::mat4 model();

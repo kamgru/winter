@@ -17,6 +17,7 @@ int main() {
     tex_ptr->from_file("../assets/textures/wall.jpg");
 
     winter::sprite spr(tex_ptr, glm::vec2(256.0f, 256.0f));
+    winter::sprite spr2(tex_ptr, glm::vec2(64.0f, 64.0f));
 
     winter::camera cam(800, 600);
 
@@ -24,6 +25,7 @@ int main() {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         spr.draw(cam, glm::vec2(400.0f, 300.0f));
+        spr2.draw(cam, glm::vec2(32.0f, 32.0f));
 
         wnd.swap_buffers();
         glfwPollEvents();

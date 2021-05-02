@@ -6,19 +6,18 @@
 
 using namespace winter;
 
-texture2d::texture2d() {
-}
+texture2d::texture2d() = default;
 
 texture2d::~texture2d() {
     glDeleteTextures(1, &m_id);
 }
 
-void texture2d::use() {
+void texture2d::use() const {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, m_id);
 }
 
-void texture2d::from_file(std::string filename) {
+void texture2d::from_file(const std::string& filename) {
     int channels;
     raw_texture_data_t data = stbi_load(filename.c_str(), &m_width, &m_height, &channels, 0);
     if (data){

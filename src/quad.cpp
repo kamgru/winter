@@ -13,7 +13,7 @@ const float VERTICES[] = {
 };
 const size_t VERTEX_ARRAY_SIZE = 20 * sizeof(float);
 const GLsizei VERTEX_ARRAY_STRIDE = 5 * sizeof(float);
-const void* POSITION_PTR = (void*)(0);
+const void* POSITION_PTR = nullptr;
 const void* TEXCOORD_PTR = (void*)(3 * sizeof(float));
 
 const unsigned int INDICES[] {
@@ -54,7 +54,7 @@ quad::~quad() {
     glDeleteVertexArrays(1, &m_vao);
 }
 
-void quad::draw() {
+void quad::draw() const {
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, ELEMENT_BUFFER_LEN, GL_UNSIGNED_INT, 0);
 }
