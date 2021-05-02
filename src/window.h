@@ -1,5 +1,5 @@
-#ifndef BASOKO_WINDOW_H
-#define BASOKO_WINDOW_H
+#ifndef WINTER_WINDOW_H
+#define WINTER_WINDOW_H
 
 #include <string>
 #include "glad/glad.h"

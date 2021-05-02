@@ -1,5 +1,5 @@
-#ifndef BASOKO_FILE_IO_H
-#define BASOKO_FILE_IO_H
+#ifndef WINTER_FILE_IO_H
+#define WINTER_FILE_IO_H
 
 #include <string>
 

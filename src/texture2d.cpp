@@ -28,7 +28,7 @@ void texture2d::from_file(std::string filename) {
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     else {
-        std::cout << "Error loading texture " << filename << "\n";
+        std::cout << "Error loading texture " << filename << std::endl;
     }
     stbi_image_free(data);
 }

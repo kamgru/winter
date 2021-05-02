@@ -13,7 +13,7 @@ add_executable(winter
         src/file_io.cpp
         src/file_io.h
         src/quad.cpp
-        src/quad.h src/texture2d.cpp src/texture2d.h)
+        src/quad.h src/texture2d.cpp src/texture2d.h src/camera.cpp src/camera.h src/sprite.cpp src/sprite.h)
 
 target_include_directories(winter PUBLIC ${CMAKE_SOURCE_DIR}/include/)
 target_link_libraries(winter PUBLIC opengl32.lib)

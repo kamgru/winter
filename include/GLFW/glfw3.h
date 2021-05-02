@@ -1352,10 +1352,10 @@ typedef struct GLFWcursor GLFWcursor;
  */
 typedef void (* GLFWerrorfun)(int,const char*);
 
-/*! @brief The function pointer type for window position callbacks.
+/*! @brief The function pointer type for window translate callbacks.
  *
- *  This is the function pointer type for window position callbacks.  A window
- *  position callback function has the following signature:
+ *  This is the function pointer type for window translate callbacks.  A window
+ *  translate callback function has the following signature:
  *  @code
  *  void callback_name(GLFWwindow* window, int xpos, int ypos)
  *  @endcode
@@ -1568,10 +1568,10 @@ typedef void (* GLFWwindowcontentscalefun)(GLFWwindow*,float,float);
  */
 typedef void (* GLFWmousebuttonfun)(GLFWwindow*,int,int,int);
 
-/*! @brief The function pointer type for cursor position callbacks.
+/*! @brief The function pointer type for cursor translate callbacks.
  *
- *  This is the function pointer type for cursor position callbacks.  A cursor
- *  position callback function has the following signature:
+ *  This is the function pointer type for cursor translate callbacks.  A cursor
+ *  translate callback function has the following signature:
  *  @code
  *  void function_name(GLFWwindow* window, double xpos, double ypos);
  *  @endcode
@@ -2190,13 +2190,13 @@ GLFWAPI GLFWmonitor** glfwGetMonitors(int* count);
  */
 GLFWAPI GLFWmonitor* glfwGetPrimaryMonitor(void);
 
-/*! @brief Returns the position of the monitor's viewport on the virtual screen.
+/*! @brief Returns the translate of the monitor's viewport on the virtual screen.
  *
- *  This function returns the position, in screen coordinates, of the upper-left
+ *  This function returns the translate, in screen coordinates, of the upper-left
  *  corner of the specified monitor.
  *
- *  Any or all of the position arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position arguments will be set to zero.
+ *  Any or all of the translate arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` translate arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] xpos Where to store the monitor x-coordinate, or `NULL`.
@@ -2217,15 +2217,15 @@ GLFWAPI void glfwGetMonitorPos(GLFWmonitor* monitor, int* xpos, int* ypos);
 
 /*! @brief Retrieves the work area of the monitor.
  *
- *  This function returns the position, in screen coordinates, of the upper-left
+ *  This function returns the translate, in screen coordinates, of the upper-left
  *  corner of the work area of the specified monitor along with the work area
  *  size in screen coordinates. The work area is defined as the area of the
  *  monitor not occluded by the operating system task bar where present. If no
  *  task bar exists then the work area is the monitor resolution in screen
  *  coordinates.
  *
- *  Any or all of the position and size arguments may be `NULL`.  If an error
- *  occurs, all non-`NULL` position and size arguments will be set to zero.
+ *  Any or all of the translate and size arguments may be `NULL`.  If an error
+ *  occurs, all non-`NULL` translate and size arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] xpos Where to store the monitor x-coordinate, or `NULL`.
@@ -2712,9 +2712,9 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *  OpenGL or OpenGL ES context.
  *
  *  By default, newly created windows use the placement recommended by the
- *  window system.  To create the window at a specific position, make it
+ *  window system.  To create the window at a specific translate, make it
  *  initially invisible using the [GLFW_VISIBLE](@ref GLFW_VISIBLE_hint) window
- *  hint, set its [position](@ref window_pos) and then [show](@ref window_hide)
+ *  hint, set its [translate](@ref window_pos) and then [show](@ref window_hide)
  *  it.
  *
  *  As long as at least one full screen window is not iconified, the screensaver
@@ -2779,14 +2779,14 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *
  *  @remark @macos When activating frame autosaving with
  *  [GLFW_COCOA_FRAME_NAME](@ref GLFW_COCOA_FRAME_NAME_hint), the specified
- *  window size and position may be overridden by previously saved values.
+ *  window size and translate may be overridden by previously saved values.
  *
  *  @remark @x11 Some window managers will not respect the placement of
  *  initially hidden windows.
  *
  *  @remark @x11 Due to the asynchronous nature of X11, it may take a moment for
  *  a window to reach its requested state.  This means you may not be able to
- *  query the final size, position or other attributes directly after window
+ *  query the final size, translate or other attributes directly after window
  *  creation.
  *
  *  @remark @x11 The class part of the `WM_CLASS` window property will by
@@ -2965,13 +2965,13 @@ GLFWAPI void glfwSetWindowTitle(GLFWwindow* window, const char* title);
  */
 GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* images);
 
-/*! @brief Retrieves the position of the content area of the specified window.
+/*! @brief Retrieves the translate of the content area of the specified window.
  *
- *  This function retrieves the position, in screen coordinates, of the
+ *  This function retrieves the translate, in screen coordinates, of the
  *  upper-left corner of the content area of the specified window.
  *
- *  Any or all of the position arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position arguments will be set to zero.
+ *  Any or all of the translate arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` translate arguments will be set to zero.
  *
  *  @param[in] window The window to query.
  *  @param[out] xpos Where to store the x-coordinate of the upper-left corner of
@@ -2983,7 +2983,7 @@ GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* i
  *  GLFW_PLATFORM_ERROR and @ref GLFW_FEATURE_UNAVAILABLE (see remarks).
  *
  *  @remark @wayland There is no way for an application to retrieve the global
- *  position of its windows.  This function will emit @ref
+ *  translate of its windows.  This function will emit @ref
  *  GLFW_FEATURE_UNAVAILABLE.
  *
  *  @thread_safety This function must only be called from the main thread.
@@ -2997,9 +2997,9 @@ GLFWAPI void glfwSetWindowIcon(GLFWwindow* window, int count, const GLFWimage* i
  */
 GLFWAPI void glfwGetWindowPos(GLFWwindow* window, int* xpos, int* ypos);
 
-/*! @brief Sets the position of the content area of the specified window.
+/*! @brief Sets the translate of the content area of the specified window.
  *
- *  This function sets the position, in screen coordinates, of the upper-left
+ *  This function sets the translate, in screen coordinates, of the upper-left
  *  corner of the content area of the specified windowed mode window.  If the
  *  window is a full screen window, this function does nothing.
  *
@@ -3017,7 +3017,7 @@ GLFWAPI void glfwGetWindowPos(GLFWwindow* window, int* xpos, int* ypos);
  *  GLFW_PLATFORM_ERROR and @ref GLFW_FEATURE_UNAVAILABLE (see remarks).
  *
  *  @remark @wayland There is no way for an application to set the global
- *  position of its windows.  This function will emit @ref
+ *  translate of its windows.  This function will emit @ref
  *  GLFW_FEATURE_UNAVAILABLE.
  *
  *  @thread_safety This function must only be called from the main thread.
@@ -3574,9 +3574,9 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *
  *  When setting a monitor, this function updates the width, height and refresh
  *  rate of the desired video mode and switches to the video mode closest to it.
- *  The window position is ignored when setting a monitor.
+ *  The window translate is ignored when setting a monitor.
  *
- *  When the monitor is `NULL`, the position, width and height are used to
+ *  When the monitor is `NULL`, the translate, width and height are used to
  *  place the window content area.  The refresh rate is ignored when no monitor
  *  is specified.
  *
@@ -3607,7 +3607,7 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *  affected by any resizing or mode switching, although you may need to update
  *  your viewport if the framebuffer size has changed.
  *
- *  @remark @wayland The desired window position is ignored, as there is no way
+ *  @remark @wayland The desired window translate is ignored, as there is no way
  *  for an application to set this property.
  *
  *  @remark @wayland Setting the window to full screen will not attempt to
@@ -3742,11 +3742,11 @@ GLFWAPI void glfwSetWindowUserPointer(GLFWwindow* window, void* pointer);
  */
 GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* window);
 
-/*! @brief Sets the position callback for the specified window.
+/*! @brief Sets the translate callback for the specified window.
  *
- *  This function sets the position callback of the specified window, which is
+ *  This function sets the translate callback of the specified window, which is
  *  called when the window is moved.  The callback is provided with the
- *  position, in screen coordinates, of the upper-left corner of the content
+ *  translate, in screen coordinates, of the upper-left corner of the content
  *  area of the window.
  *
  *  @param[in] window The window whose callback to set.
@@ -3765,7 +3765,7 @@ GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* window);
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
  *
  *  @remark @wayland This callback will never be called, as there is no way for
- *  an application to know its global position.
+ *  an application to know its global translate.
  *
  *  @thread_safety This function must only be called from the main thread.
  *
@@ -4471,23 +4471,23 @@ GLFWAPI int glfwGetKey(GLFWwindow* window, int key);
  */
 GLFWAPI int glfwGetMouseButton(GLFWwindow* window, int button);
 
-/*! @brief Retrieves the position of the cursor relative to the content area of
+/*! @brief Retrieves the translate of the cursor relative to the content area of
  *  the window.
  *
- *  This function returns the position of the cursor, in screen coordinates,
+ *  This function returns the translate of the cursor, in screen coordinates,
  *  relative to the upper-left corner of the content area of the specified
  *  window.
  *
  *  If the cursor is disabled (with `GLFW_CURSOR_DISABLED`) then the cursor
- *  position is unbounded and limited only by the minimum and maximum values of
+ *  translate is unbounded and limited only by the minimum and maximum values of
  *  a `double`.
  *
  *  The coordinate can be converted to their integer equivalents with the
  *  `floor` function.  Casting directly to an integer type works for positive
  *  coordinates, but fails for negative ones.
  *
- *  Any or all of the position arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` position arguments will be set to zero.
+ *  Any or all of the translate arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` translate arguments will be set to zero.
  *
  *  @param[in] window The desired window.
  *  @param[out] xpos Where to store the cursor x-coordinate, relative to the
@@ -4509,10 +4509,10 @@ GLFWAPI int glfwGetMouseButton(GLFWwindow* window, int button);
  */
 GLFWAPI void glfwGetCursorPos(GLFWwindow* window, double* xpos, double* ypos);
 
-/*! @brief Sets the position of the cursor, relative to the content area of the
+/*! @brief Sets the translate of the cursor, relative to the content area of the
  *  window.
  *
- *  This function sets the position, in screen coordinates, of the cursor
+ *  This function sets the translate, in screen coordinates, of the cursor
  *  relative to the upper-left corner of the content area of the specified
  *  window.  The window must have input focus.  If the window does not have
  *  input focus when this function is called, it fails silently.
@@ -4522,7 +4522,7 @@ GLFWAPI void glfwGetCursorPos(GLFWwindow* window, double* xpos, double* ypos);
  *  cursor, transparently re-centers it and provides unconstrained cursor
  *  motion.  See @ref glfwSetInputMode for more information.
  *
- *  If the cursor mode is `GLFW_CURSOR_DISABLED` then the cursor position is
+ *  If the cursor mode is `GLFW_CURSOR_DISABLED` then the cursor translate is
  *  unconstrained and limited only by the minimum and maximum values of
  *  a `double`.
  *
@@ -4861,11 +4861,11 @@ GLFWAPI GLFWcharmodsfun glfwSetCharModsCallback(GLFWwindow* window, GLFWcharmods
  */
 GLFWAPI GLFWmousebuttonfun glfwSetMouseButtonCallback(GLFWwindow* window, GLFWmousebuttonfun callback);
 
-/*! @brief Sets the cursor position callback.
+/*! @brief Sets the cursor translate callback.
  *
- *  This function sets the cursor position callback of the specified window,
+ *  This function sets the cursor translate callback of the specified window,
  *  which is called when the cursor is moved.  The callback is provided with the
- *  position, in screen coordinates, relative to the upper-left corner of the
+ *  translate, in screen coordinates, relative to the upper-left corner of the
  *  content area of the window.
  *
  *  @param[in] window The window whose callback to set.
@@ -6070,4 +6070,3 @@ GLFWAPI VkResult glfwCreateWindowSurface(VkInstance instance, GLFWwindow* window
 #endif
 
 #endif /* _glfw3_h_ */
-

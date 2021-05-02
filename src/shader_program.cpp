@@ -38,7 +38,7 @@ bool compile(shader_id id, const char *src){
 
 void print_compile_err(shader_id id){
     glGetShaderInfoLog(id, INFO_LOG_BUFFER_SIZE, NULL, info_log);
-    std::cout << "Error compiling shader:\n" << info_log << "\n";
+    std::cout << "Error compiling shader:\n" << info_log << std::endl;
 }
 
 void shader_program::attach_shader_file(SHADER_TYPE shader_type, std::string filename) {
@@ -56,7 +56,7 @@ void shader_program::attach_shader_file(SHADER_TYPE shader_type, std::string fil
     glGetProgramiv(m_program_id, GL_LINK_STATUS, &link_success);
     if (!link_success){
         glGetProgramInfoLog(m_program_id, INFO_LOG_BUFFER_SIZE, NULL, info_log);
-        std::cout << "Error linking program:\n" << info_log << "\n";
+        std::cout << "Error linking program:\n" << info_log << std::endl;
     }
     glDeleteShader(shader_id);
 
@@ -68,4 +68,14 @@ void shader_program::attach_shader_file(SHADER_TYPE shader_type, std::string fil
 
 void shader_program::use() {
     glUseProgram(m_program_id);
+}
+
+void shader_program::set_uniform_mat4(std::string name, glm::mat4 mat) {
+    int location = glGetUniformLocation(m_program_id, name.c_str());
+    if (location >= 0){
+        glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(mat));
+    }
+    else{
+        std::cout << "Error, uniform " << name << " not found" << std::endl;
+    }
 }

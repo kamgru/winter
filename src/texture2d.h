@@ -1,7 +1,8 @@
-#ifndef BASOKO_TEXTURE2D_H
-#define BASOKO_TEXTURE2D_H
+#ifndef WINTER_TEXTURE2D_H
+#define WINTER_TEXTURE2D_H
 
 #include <string>
+#include <glm/vec2.hpp>
 
 namespace winter {
 
@@ -14,6 +15,7 @@ namespace winter {
         ~texture2d();
         void from_file(std::string filename);
         void use();
+        glm::vec2 size() { return glm::vec2(m_width, m_height); };
     private:
         texture_id_t m_id;
         int m_width;

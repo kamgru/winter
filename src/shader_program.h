@@ -1,7 +1,9 @@
-#ifndef BASOKO_SHADER_PROGRAM_H
-#define BASOKO_SHADER_PROGRAM_H
+#ifndef WINTER_SHADER_PROGRAM_H
+#define WINTER_SHADER_PROGRAM_H
 
 #include <string>
+#include "glm/glm.hpp"
+#include "glm/gtc/type_ptr.hpp"
 
 namespace winter {
 
@@ -17,6 +19,7 @@ namespace winter {
         shader_program();
         ~shader_program();
         void attach_shader_file(SHADER_TYPE shader_type, std::string filename);
+        void set_uniform_mat4(std::string name, glm::mat4 mat);
         void use();
     private:
         program_id m_program_id;
