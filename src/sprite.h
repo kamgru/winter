@@ -1,11 +1,13 @@
 #ifndef WINTER_SPRITE_H
 #define WINTER_SPRITE_H
 
-#include "texture2d.h"
 #include "rect.h"
 #include <memory>
 
 namespace winter {
+
+    class texture2d;
+
     class sprite {
     public:
         sprite(std::shared_ptr<texture2d> tex_ptr, rect src);

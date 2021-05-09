@@ -2,12 +2,11 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "window.h"
-#include "shader_program.h"
 #include "texture2d.h"
 #include "camera.h"
-#include "mesh.h"
 #include "sprite_component.h"
 #include "actor.h"
+#include "sprite_renderer.h"
 
 int main() {
 
@@ -19,34 +18,26 @@ int main() {
 
     winter::camera cam(800, 600);
 
-    winter::sprite spr(tex_ptr, {32, 0, 32, 32});
-    winter::sprite_component spr_comp;
-    spr_comp.sprite(spr);
+    std::shared_ptr<winter::actor> player = std::make_shared<winter::actor>();
+    winter::sprite player_spr(tex_ptr, {0, 0, 32, 32});
+    std::shared_ptr<winter::sprite_component>  player_spr_comp = player->add_component<winter::sprite_component>();
+    player_spr_comp->sprite(player_spr);
 
-    winter::sprite spr2(tex_ptr, { 64, 0, 64, 64});
-    winter::sprite_component spr_comp2;
-    spr_comp2.sprite(spr2);
+    std::shared_ptr<winter::transform_component> player_transform = player->get_transform();
 
-    winter::actor act;
-    act.transform().position(glm::vec3(400.0f, 300.0f, 0.0f));
-    act.transform().scale(glm::vec3(32.0f, 32.0f, 0.0f));
+    player_transform->position(glm::vec3(400.0f, 300.0f, 0.0f));
+    player_transform->scale(glm::vec3(player_spr.src_rect().w, player_spr.src_rect().h, 0.0f));
 
-    glm::mat4 model(1.0f);
-    model = glm::translate(model, glm::vec3(400.0f, 300.0f, 0.0f));
-    model = glm::scale(model, glm::vec3(32.0f, 32.0f, 0.0f));
+    winter::sprite_renderer renderer(cam);
 
-    glm::mat4 model1(1.0f);
-    model1 = glm::translate(model1, glm::vec3(464.0f, 300.0f, 0.0f));
-    model1 = glm::scale(model1, glm::vec3(64.0f, 64.0f, 0.0f));
-
-
+    std::shared_ptr<winter::sprite_component> node;
+    node = player->get_component<winter::sprite_component>();
 
     while(!wnd.should_close()){
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        spr_comp.render(model, cam.view(), cam.projection());
-        spr_comp2.render(model1, cam.view(), cam.projection());
+        renderer.render(node);
 
         wnd.swap_buffers();
         glfwPollEvents();

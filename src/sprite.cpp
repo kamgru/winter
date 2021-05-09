@@ -1,4 +1,5 @@
 #include "sprite.h"
+#include "texture2d.h"
 
 using namespace winter;
 

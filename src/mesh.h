@@ -28,10 +28,9 @@ namespace winter {
     public:
         mesh(std::vector<vertex> vertices, std::vector<unsigned int> indices);
         ~mesh();
-        void render();
+        void render() const;
         const std::vector<vertex>* vertices() { return &m_vertices; }
         void vertices(std::vector<vertex> vertices);
-        const std::vector<unsigned int>* indices() { return &m_indices; }
         void indices(std::vector<unsigned int> indices);
     private:
         vao_t m_vao;

@@ -1,14 +1,21 @@
-//
-// Created by kgrudzien_adm on 03.05.2021.
-//
-
 #ifndef WINTER_SPRITE_RENDERER_H
 #define WINTER_SPRITE_RENDERER_H
 
+#include <memory>
+#include "camera.h"
 
-class sprite_renderer {
+namespace winter {
 
-};
+    class sprite_component;
 
+    class sprite_renderer {
+    public:
+        sprite_renderer(camera cam);
+        void render(std::shared_ptr<sprite_component> spr_comp);
 
-#endif //WINTER_SPRITE_RENDERER_H
+    private:
+        camera m_cam;
+    };
+}
+
+#endif

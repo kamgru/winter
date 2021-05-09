@@ -1,4 +1,5 @@
 #include "sprite_component.h"
+#include "texture2d.h"
 
 using namespace winter;
 
@@ -11,20 +12,8 @@ std::vector<winter::vertex> vertices {
 
 std::vector<unsigned int> indices = {0, 1, 3, 1, 2, 3};
 
-void winter::sprite_component::render(glm::mat4 model, glm::mat4 view, glm::mat4 projection) {
-    if (m_sprite.texture() == nullptr) {
-        return;
-    }
-    m_sprite.texture()->use();
-    m_program.use();
-    m_program.set_uniform_mat4("u_model", model);
-    m_program.set_uniform_mat4("u_view", view);
-    m_program.set_uniform_mat4("u_projection", projection);
-    m_mesh.render();
-}
-
-sprite_component::sprite_component()
-    : m_mesh(vertices, indices) {
+sprite_component::sprite_component(actor *owner): component(owner),
+    m_mesh(vertices, indices) {
     m_program.attach_shader_file(SHADER_TYPE_VERTEX, "../assets/shaders/unlit.vert");
     m_program.attach_shader_file(SHADER_TYPE_FRAGMENT, "../assets/shaders/unlit.frag");
 }
