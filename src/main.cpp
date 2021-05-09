@@ -28,8 +28,8 @@ int main() {
     spr_comp2.sprite(spr2);
 
     winter::actor act;
-    act.transform().position(glm::vec3(400.0f, 300.0f, 0.0f));
-    act.transform().scale(glm::vec3(32.0f, 32.0f, 0.0f));
+    act.get_transform().position(glm::vec3(400.0f, 300.0f, 0.0f));
+    act.get_transform().scale(glm::vec3(32.0f, 32.0f, 0.0f));
 
     glm::mat4 model(1.0f);
     model = glm::translate(model, glm::vec3(400.0f, 300.0f, 0.0f));

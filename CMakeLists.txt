@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.19)
 project(winter)
-
 set(CMAKE_CXX_STANDARD 11)
 add_executable(winter
         ext/glad.c
@@ -29,5 +28,18 @@ add_executable(winter
         src/sprite_component.h)
 
 target_include_directories(winter PUBLIC ${CMAKE_SOURCE_DIR}/include/)
-target_link_libraries(winter PUBLIC opengl32.lib)
-target_link_libraries(winter PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw3.lib)
+if (WIN32)
+    target_link_libraries(winter PUBLIC opengl32.lib)
+    target_link_libraries(winter PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/lib/glfw3_win32.lib)
+endif()
+if (UNIX)
+    target_link_libraries(winter PUBLIC libGL.so)
+    target_link_libraries(winter PUBLIC libXrandr.so)
+    target_link_libraries(winter PUBLIC libXi.so)
+    target_link_libraries(winter PUBLIC libdl.so)
+    target_link_libraries(winter PUBLIC ${CMAKE_DL_LIBS})
+    target_link_libraries(winter PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/lib/libglfw3.a)
+    target_link_libraries(winter PUBLIC libpthread.so)
+    target_link_libraries(winter PUBLIC libX11.so)
+
+endif()

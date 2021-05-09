@@ -7,7 +7,7 @@ namespace winter {
 
     class actor {
     public:
-        transform& transform() { return m_transform; };
+        transform& get_transform() { return m_transform; };
     private:
         winter::transform m_transform {};
     };
