@@ -28,7 +28,7 @@ mesh::~mesh() {
     glDeleteVertexArrays(1, &m_vao);
 }
 
-void mesh::render() {
+void mesh::render() const{
     glBindVertexArray(m_vao);
     glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);
 }
