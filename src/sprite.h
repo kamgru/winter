@@ -3,6 +3,7 @@
 
 #include "rect.h"
 #include <memory>
+#include "resource_manager.h"
 
 namespace winter {
 
@@ -17,6 +18,7 @@ namespace winter {
         rect uv_rect();
     private:
         std::shared_ptr<texture2d> m_tex_ptr = nullptr;
+        res_handle<texture2d> m_tex_hnd;
         rect m_src_rect = {};
         rect m_uv_rect = {};
     };

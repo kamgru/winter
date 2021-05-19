@@ -27,7 +27,7 @@ add_executable(winter
         src/sprite_component.h
         src/sprite_renderer.cpp
         src/sprite_renderer.h
-        src/transform_component.h src/actor.cpp src/renderer.cpp src/renderer.h)
+        src/transform_component.h src/actor.cpp src/renderer.cpp src/renderer.h src/material.cpp src/material.h src/resource_manager.cpp src/resource_manager.h)
 
 target_include_directories(winter PUBLIC ${CMAKE_SOURCE_DIR}/include/)
 target_link_libraries(winter PUBLIC opengl32.lib)

@@ -7,14 +7,17 @@
 #include "sprite_component.h"
 #include "actor.h"
 #include "sprite_renderer.h"
+#include "resource_manager.h"
 
 int main() {
 
     winter::window wnd(800, 600, "winter");
     wnd.create();
 
-    std::shared_ptr<winter::texture2d> tex_ptr(new winter::texture2d());
-    tex_ptr->from_file("../assets/textures/test_tiles.png");
+    winter::res_handle<winter::texture2d> player_tex_h("../assets/textures/test_tiles.png");
+    winter::resource_manager res_mgr;
+
+    std::shared_ptr<winter::texture2d> tex_ptr = res_mgr.get_resource(player_tex_h);
 
     winter::camera cam(800, 600);
 
