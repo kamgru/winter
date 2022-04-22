@@ -1,6 +1,7 @@
 #include <fstream>
 #include <sstream>
 #include "file_io.h"
+#include "stb/stb_image.h"
 
 using namespace winter;
 

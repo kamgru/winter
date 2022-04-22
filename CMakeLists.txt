@@ -7,25 +7,21 @@ add_executable(winter
         src/main.cpp
         src/window.cpp
         src/window.h
-        src/shader_program.cpp
-        src/shader_program.h
+        src/ShaderProgram.cpp
+        src/ShaderProgram.h
         src/file_io.cpp
         src/file_io.h
-        src/texture2d.cpp
-        src/texture2d.h
+        src/Texture2d.cpp
+        src/Texture2d.h
         src/camera.cpp
         src/camera.h
-        src/sprite.cpp
-        src/sprite.h
+        src/Sprite.cpp
+        src/Sprite.h
         src/rect.h
-        src/mesh.cpp
-        src/mesh.h
-        src/actor.cpp
-        src/actor.h
-        src/component.cpp
-        src/component.h
+        src/Mesh.cpp
+        src/Mesh.h
         src/sprite_component.cpp
-        src/sprite_component.h)
+        src/sprite_component.h src/Renderer.cpp src/Renderer.h)
 
 target_include_directories(winter PUBLIC ${CMAKE_SOURCE_DIR}/include/)
 if (WIN32)
