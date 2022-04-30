@@ -1375,9 +1375,9 @@ typedef void (* GLFWerrorfun)(int,const char*);
  */
 typedef void (* GLFWwindowposfun)(GLFWwindow*,int,int);
 
-/*! @brief The function pointer type for window size callbacks.
+/*! @brief The function pointer type for window getSize callbacks.
  *
- *  This is the function pointer type for window size callbacks.  A window size
+ *  This is the function pointer type for window size callbacks.  A window getSize
  *  callback function has the following signature:
  *  @code
  *  void callback_name(GLFWwindow* window, int width, int height)
@@ -1500,10 +1500,10 @@ typedef void (* GLFWwindowiconifyfun)(GLFWwindow*,int);
  */
 typedef void (* GLFWwindowmaximizefun)(GLFWwindow*,int);
 
-/*! @brief The function pointer type for framebuffer size callbacks.
+/*! @brief The function pointer type for framebuffer getSize callbacks.
  *
- *  This is the function pointer type for framebuffer size callbacks.
- *  A framebuffer size callback function has the following signature:
+ *  This is the function pointer type for framebuffer getSize callbacks.
+ *  A framebuffer getSize callback function has the following signature:
  *  @code
  *  void function_name(GLFWwindow* window, int width, int height)
  *  @endcode
@@ -2219,13 +2219,13 @@ GLFWAPI void glfwGetMonitorPos(GLFWmonitor* monitor, int* xpos, int* ypos);
  *
  *  This function returns the translate, in screen coordinates, of the upper-left
  *  corner of the work area of the specified monitor along with the work area
- *  size in screen coordinates. The work area is defined as the area of the
+ *  getSize in screen coordinates. The work area is defined as the area of the
  *  monitor not occluded by the operating system task bar where present. If no
  *  task bar exists then the work area is the monitor resolution in screen
  *  coordinates.
  *
- *  Any or all of the translate and size arguments may be `NULL`.  If an error
- *  occurs, all non-`NULL` translate and size arguments will be set to zero.
+ *  Any or all of the translate and getSize arguments may be `NULL`.  If an error
+ *  occurs, all non-`NULL` translate and getSize arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] xpos Where to store the monitor x-coordinate, or `NULL`.
@@ -2246,18 +2246,18 @@ GLFWAPI void glfwGetMonitorPos(GLFWmonitor* monitor, int* xpos, int* ypos);
  */
 GLFWAPI void glfwGetMonitorWorkarea(GLFWmonitor* monitor, int* xpos, int* ypos, int* width, int* height);
 
-/*! @brief Returns the physical size of the monitor.
+/*! @brief Returns the physical getSize of the monitor.
  *
- *  This function returns the size, in millimetres, of the display area of the
+ *  This function returns the getSize, in millimetres, of the display area of the
  *  specified monitor.
  *
- *  Some systems do not provide accurate monitor size information, either
+ *  Some systems do not provide accurate monitor getSize information, either
  *  because the monitor
  *  [EDID](https://en.wikipedia.org/wiki/Extended_display_identification_data)
  *  data is incorrect or because the driver does not report it accurately.
  *
- *  Any or all of the size arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` size arguments will be set to zero.
+ *  Any or all of the getSize arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` getSize arguments will be set to zero.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] widthMM Where to store the width, in millimetres, of the
@@ -2267,7 +2267,7 @@ GLFWAPI void glfwGetMonitorWorkarea(GLFWmonitor* monitor, int* xpos, int* ypos, 
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED.
  *
- *  @remark @win32 calculates the returned physical size from the
+ *  @remark @win32 calculates the returned physical getSize from the
  *  current resolution and system DPI instead of querying the monitor EDID data.
  *
  *  @thread_safety This function must only be called from the main thread.
@@ -2286,13 +2286,13 @@ GLFWAPI void glfwGetMonitorPhysicalSize(GLFWmonitor* monitor, int* widthMM, int*
  *  content scale is the ratio between the current DPI and the platform's
  *  default DPI.  This is especially important for text and any UI elements.  If
  *  the pixel dimensions of your UI scaled by this look appropriate on your
- *  machine then it should appear at a reasonable size on other machines
+ *  machine then it should appear at a reasonable getSize on other machines
  *  regardless of their DPI and scaling settings.  This relies on the system DPI
  *  and scaling settings being somewhat correct.
  *
  *  The content scale may depend on both the monitor resolution and pixel
  *  density and on user settings.  It may be very different from the raw DPI
- *  calculated from the physical size and current resolution.
+ *  calculated from the physical getSize and current resolution.
  *
  *  @param[in] monitor The monitor to query.
  *  @param[out] xscale Where to store the x-axis content scale, or `NULL`.
@@ -2563,10 +2563,10 @@ GLFWAPI const GLFWgammaramp* glfwGetGammaRamp(GLFWmonitor* monitor);
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
  *  GLFW_PLATFORM_ERROR.
  *
- *  @remark The size of the specified gamma ramp should match the size of the
+ *  @remark The size of the specified gamma ramp should match the getSize of the
  *  current ramp for that monitor.
  *
- *  @remark @win32 The gamma ramp size must be 256.
+ *  @remark @win32 The gamma ramp getSize must be 256.
  *
  *  @remark @wayland Gamma handling is a privileged protocol, this function
  *  will thus never be implemented and emits @ref GLFW_PLATFORM_ERROR.
@@ -2689,7 +2689,7 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *
  *  The created window, framebuffer and context may differ from what you
  *  requested, as not all parameters and hints are
- *  [hard constraints](@ref window_hints_hard).  This includes the size of the
+ *  [hard constraints](@ref window_hints_hard).  This includes the getSize of the
  *  window, especially for full screen windows.  To query the actual attributes
  *  of the created window, framebuffer and context, see @ref
  *  glfwGetWindowAttrib, @ref glfwGetWindowSize and @ref glfwGetFramebufferSize.
@@ -2700,7 +2700,7 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *  recommended that you pick the primary monitor.  For more information on how
  *  to query connected monitors, see @ref monitor_monitors.
  *
- *  For full screen windows, the specified size becomes the resolution of the
+ *  For full screen windows, the specified getSize becomes the resolution of the
  *  window's _desired video mode_.  As long as a full screen window is not
  *  iconified, the supported video mode most closely matching the desired video
  *  mode is set for the specified monitor.  For more information about full
@@ -2722,7 +2722,7 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *
  *  Window systems put limits on window sizes.  Very large or very small window
  *  dimensions may be overridden by the window system on creation.  Check the
- *  actual [size](@ref window_size) after creation.
+ *  actual [getSize](@ref window_size) after creation.
  *
  *  The [swap interval](@ref buffer_swap) is not set during window creation and
  *  the initial value may vary depending on driver settings and defaults.
@@ -2779,14 +2779,14 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *
  *  @remark @macos When activating frame autosaving with
  *  [GLFW_COCOA_FRAME_NAME](@ref GLFW_COCOA_FRAME_NAME_hint), the specified
- *  window size and translate may be overridden by previously saved values.
+ *  window getSize and translate may be overridden by previously saved values.
  *
  *  @remark @x11 Some window managers will not respect the placement of
  *  initially hidden windows.
  *
  *  @remark @x11 Due to the asynchronous nature of X11, it may take a moment for
  *  a window to reach its requested state.  This means you may not be able to
- *  query the final size, translate or other attributes directly after window
+ *  query the final getSize, translate or other attributes directly after window
  *  creation.
  *
  *  @remark @x11 The class part of the `WM_CLASS` window property will by
@@ -2806,7 +2806,7 @@ GLFWAPI void glfwWindowHintString(int hint, const char* value);
  *  the window won't be decorated.
  *
  *  @remark @wayland A full screen window will not attempt to change the mode,
- *  no matter what the requested size or refresh rate.
+ *  no matter what the requested getSize or refresh rate.
  *
  *  @remark @wayland Screensaver inhibition requires the idle-inhibit protocol
  *  to be implemented in the user's compositor.
@@ -3032,16 +3032,16 @@ GLFWAPI void glfwGetWindowPos(GLFWwindow* window, int* xpos, int* ypos);
  */
 GLFWAPI void glfwSetWindowPos(GLFWwindow* window, int xpos, int ypos);
 
-/*! @brief Retrieves the size of the content area of the specified window.
+/*! @brief Retrieves the getSize of the content area of the specified window.
  *
- *  This function retrieves the size, in screen coordinates, of the content area
- *  of the specified window.  If you wish to retrieve the size of the
+ *  This function retrieves the getSize, in screen coordinates, of the content area
+ *  of the specified window.  If you wish to retrieve the getSize of the
  *  framebuffer of the window in pixels, see @ref glfwGetFramebufferSize.
  *
- *  Any or all of the size arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` size arguments will be set to zero.
+ *  Any or all of the getSize arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` getSize arguments will be set to zero.
  *
- *  @param[in] window The window whose size to retrieve.
+ *  @param[in] window The window whose getSize to retrieve.
  *  @param[out] width Where to store the width, in screen coordinates, of the
  *  content area, or `NULL`.
  *  @param[out] height Where to store the height, in screen coordinates, of the
@@ -3062,14 +3062,14 @@ GLFWAPI void glfwSetWindowPos(GLFWwindow* window, int xpos, int ypos);
  */
 GLFWAPI void glfwGetWindowSize(GLFWwindow* window, int* width, int* height);
 
-/*! @brief Sets the size limits of the specified window.
+/*! @brief Sets the getSize limits of the specified window.
  *
- *  This function sets the size limits of the content area of the specified
- *  window.  If the window is full screen, the size limits only take effect
+ *  This function sets the getSize limits of the content area of the specified
+ *  window.  If the window is full screen, the getSize limits only take effect
  *  once it is made windowed.  If the window is not resizable, this function
  *  does nothing.
  *
- *  The size limits are applied immediately to a windowed mode window and may
+ *  The getSize limits are applied immediately to a windowed mode window and may
  *  cause it to be resized.
  *
  *  The maximum dimensions must be greater than or equal to the minimum
@@ -3088,10 +3088,10 @@ GLFWAPI void glfwGetWindowSize(GLFWwindow* window, int* width, int* height);
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
  *  GLFW_INVALID_VALUE and @ref GLFW_PLATFORM_ERROR.
  *
- *  @remark If you set size limits and an aspect ratio that conflict, the
+ *  @remark If you set getSize limits and an aspect ratio that conflict, the
  *  results are undefined.
  *
- *  @remark @wayland The size limits will not be applied until the window is
+ *  @remark @wayland The getSize limits will not be applied until the window is
  *  actually resized, either by the user or by the compositor.
  *
  *  @thread_safety This function must only be called from the main thread.
@@ -3131,7 +3131,7 @@ GLFWAPI void glfwSetWindowSizeLimits(GLFWwindow* window, int minwidth, int minhe
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED, @ref
  *  GLFW_INVALID_VALUE and @ref GLFW_PLATFORM_ERROR.
  *
- *  @remark If you set size limits and an aspect ratio that conflict, the
+ *  @remark If you set getSize limits and an aspect ratio that conflict, the
  *  results are undefined.
  *
  *  @remark @wayland The aspect ratio will not be applied until the window is
@@ -3148,9 +3148,9 @@ GLFWAPI void glfwSetWindowSizeLimits(GLFWwindow* window, int minwidth, int minhe
  */
 GLFWAPI void glfwSetWindowAspectRatio(GLFWwindow* window, int numer, int denom);
 
-/*! @brief Sets the size of the content area of the specified window.
+/*! @brief Sets the getSize of the content area of the specified window.
  *
- *  This function sets the size, in screen coordinates, of the content area of
+ *  This function sets the getSize, in screen coordinates, of the content area of
  *  the specified window.
  *
  *  For full screen windows, this function updates the resolution of its desired
@@ -3174,7 +3174,7 @@ GLFWAPI void glfwSetWindowAspectRatio(GLFWwindow* window, int numer, int denom);
  *  GLFW_PLATFORM_ERROR.
  *
  *  @remark @wayland A full screen window will not attempt to change the mode,
- *  no matter what the requested size.
+ *  no matter what the requested getSize.
  *
  *  @thread_safety This function must only be called from the main thread.
  *
@@ -3189,14 +3189,14 @@ GLFWAPI void glfwSetWindowAspectRatio(GLFWwindow* window, int numer, int denom);
  */
 GLFWAPI void glfwSetWindowSize(GLFWwindow* window, int width, int height);
 
-/*! @brief Retrieves the size of the framebuffer of the specified window.
+/*! @brief Retrieves the getSize of the framebuffer of the specified window.
  *
- *  This function retrieves the size, in pixels, of the framebuffer of the
- *  specified window.  If you wish to retrieve the size of the window in screen
+ *  This function retrieves the getSize, in pixels, of the framebuffer of the
+ *  specified window.  If you wish to retrieve the getSize of the window in screen
  *  coordinates, see @ref glfwGetWindowSize.
  *
- *  Any or all of the size arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` size arguments will be set to zero.
+ *  Any or all of the getSize arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` getSize arguments will be set to zero.
  *
  *  @param[in] window The window whose framebuffer to query.
  *  @param[out] width Where to store the width, in pixels, of the framebuffer,
@@ -3218,28 +3218,28 @@ GLFWAPI void glfwSetWindowSize(GLFWwindow* window, int width, int height);
  */
 GLFWAPI void glfwGetFramebufferSize(GLFWwindow* window, int* width, int* height);
 
-/*! @brief Retrieves the size of the frame of the window.
+/*! @brief Retrieves the getSize of the frame of the window.
  *
- *  This function retrieves the size, in screen coordinates, of each edge of the
- *  frame of the specified window.  This size includes the title bar, if the
- *  window has one.  The size of the frame may vary depending on the
+ *  This function retrieves the getSize, in screen coordinates, of each edge of the
+ *  frame of the specified window.  This getSize includes the title bar, if the
+ *  window has one.  The getSize of the frame may vary depending on the
  *  [window-related hints](@ref window_hints_wnd) used to create it.
  *
- *  Because this function retrieves the size of each window frame edge and not
+ *  Because this function retrieves the getSize of each window frame edge and not
  *  the offset along a particular coordinate axis, the retrieved values will
  *  always be zero or positive.
  *
- *  Any or all of the size arguments may be `NULL`.  If an error occurs, all
- *  non-`NULL` size arguments will be set to zero.
+ *  Any or all of the getSize arguments may be `NULL`.  If an error occurs, all
+ *  non-`NULL` getSize arguments will be set to zero.
  *
- *  @param[in] window The window whose frame size to query.
- *  @param[out] left Where to store the size, in screen coordinates, of the left
+ *  @param[in] window The window whose frame getSize to query.
+ *  @param[out] left Where to store the getSize, in screen coordinates, of the left
  *  edge of the window frame, or `NULL`.
- *  @param[out] top Where to store the size, in screen coordinates, of the top
+ *  @param[out] top Where to store the getSize, in screen coordinates, of the top
  *  edge of the window frame, or `NULL`.
- *  @param[out] right Where to store the size, in screen coordinates, of the
+ *  @param[out] right Where to store the getSize, in screen coordinates, of the
  *  right edge of the window frame, or `NULL`.
- *  @param[out] bottom Where to store the size, in screen coordinates, of the
+ *  @param[out] bottom Where to store the getSize, in screen coordinates, of the
  *  bottom edge of the window frame, or `NULL`.
  *
  *  @errors Possible errors include @ref GLFW_NOT_INITIALIZED and @ref
@@ -3261,7 +3261,7 @@ GLFWAPI void glfwGetWindowFrameSize(GLFWwindow* window, int* left, int* top, int
  *  content scale is the ratio between the current DPI and the platform's
  *  default DPI.  This is especially important for text and any UI elements.  If
  *  the pixel dimensions of your UI scaled by this look appropriate on your
- *  machine then it should appear at a reasonable size on other machines
+ *  machine then it should appear at a reasonable getSize on other machines
  *  regardless of their DPI and scaling settings.  This relies on the system DPI
  *  and scaling settings being somewhat correct.
  *
@@ -3581,13 +3581,13 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *  is specified.
  *
  *  If you only wish to update the resolution of a full screen window or the
- *  size of a windowed mode window, see @ref glfwSetWindowSize.
+ *  getSize of a windowed mode window, see @ref glfwSetWindowSize.
  *
  *  When a window transitions from full screen to windowed mode, this function
  *  restores any previous window settings such as whether it is decorated,
- *  floating, resizable, has size or aspect ratio limits, etc.
+ *  floating, resizable, has getSize or aspect ratio limits, etc.
  *
- *  @param[in] window The window whose monitor, size or video mode to set.
+ *  @param[in] window The window whose monitor, getSize or video mode to set.
  *  @param[in] monitor The desired monitor, or `NULL` to set windowed mode.
  *  @param[in] xpos The desired x-coordinate of the upper-left corner of the
  *  content area.
@@ -3605,13 +3605,13 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *
  *  @remark The OpenGL or OpenGL ES context will not be destroyed or otherwise
  *  affected by any resizing or mode switching, although you may need to update
- *  your viewport if the framebuffer size has changed.
+ *  your viewport if the framebuffer getSize has changed.
  *
  *  @remark @wayland The desired window translate is ignored, as there is no way
  *  for an application to set this property.
  *
  *  @remark @wayland Setting the window to full screen will not attempt to
- *  change the mode, no matter what the requested size or refresh rate.
+ *  change the mode, no matter what the requested getSize or refresh rate.
  *
  *  @thread_safety This function must only be called from the main thread.
  *
@@ -3777,10 +3777,10 @@ GLFWAPI void* glfwGetWindowUserPointer(GLFWwindow* window);
  */
 GLFWAPI GLFWwindowposfun glfwSetWindowPosCallback(GLFWwindow* window, GLFWwindowposfun callback);
 
-/*! @brief Sets the size callback for the specified window.
+/*! @brief Sets the getSize callback for the specified window.
  *
- *  This function sets the size callback of the specified window, which is
- *  called when the window is resized.  The callback is provided with the size,
+ *  This function sets the getSize callback of the specified window, which is
+ *  called when the window is resized.  The callback is provided with the getSize,
  *  in screen coordinates, of the content area of the window.
  *
  *  @param[in] window The window whose callback to set.
