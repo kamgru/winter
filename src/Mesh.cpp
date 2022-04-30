@@ -55,18 +55,42 @@ std::unique_ptr<Mesh> Mesh::createQuad() {
 
 std::unique_ptr<Mesh> Mesh::createCube() {
     std::vector<winter::vertex> vertices {
-            { glm::vec3(0.5f, 0.5f, 0.5f), glm::vec2(1.0f, 1.0f)},
-            { glm::vec3(0.5f, -0.5f, 0.5f), glm::vec2(1.0f, 0.0f)},
-            { glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},
-            { glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec2(0.0f, 1.0f)},
 
-            { glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
-            { glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},
-            { glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 0.0f)},
-            { glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},
+        /*          6----------7
+         *         /|         /|
+         *        3----------2 |
+         *        | |        | |
+         *        | 5 -------|-4
+         *        |/         |/
+         *        0----------1
+         */
+            //front
+            /*0*/{ glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},
+            /*1*/{ glm::vec3(0.5f, -0.5f, 0.5f), glm::vec2(1.0f, 0.0f)},
+            /*2*/{ glm::vec3(0.5f, 0.5f, 0.5f), glm::vec2(1.0f, 1.0f)},
+            /*3*/{ glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec2(0.0f, 1.0f)},
+
+            //back
+            /*4*/{ glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},
+            /*5*/{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 0.0f)},
+            /*6*/{ glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},
+            /*7*/{ glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
+
+            //left
+            /*0*/{ glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(1.0f, 0.0f)},
+            /*3*/{ glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},
+            /*6*/{ glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},
+            /*5*/{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
+
     };
 
-    std::vector<unsigned int> indices = {0, 1, 3, 1, 2, 3, 4, 5, 0, 5, 1, 0, 7, 6, 4, 6, 5, 4};
+    std::vector<unsigned int> indices = {
+            //front
+            0, 1, 2, 2, 3, 0,
+            //back
+            4, 5, 6, 6, 7, 4,
+            //left
+            0, 3, 6, 6, 5, 0};
 
     return std::make_unique<Mesh>(vertices, indices);
 }

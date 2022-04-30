@@ -5,16 +5,16 @@ add_executable(winter
         ext/glad.c
         ext/stb_image.cpp
         src/main.cpp
-        src/window.cpp
-        src/window.h
+        src/Window.cpp
+        src/Window.h
         src/ShaderProgram.cpp
         src/ShaderProgram.h
         src/file_io.cpp
         src/file_io.h
         src/Texture2d.cpp
         src/Texture2d.h
-        src/camera.cpp
-        src/camera.h
+        src/Camera.cpp
+        src/Camera.h
         src/Sprite.cpp
         src/Sprite.h
         src/rect.h
