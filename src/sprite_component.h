@@ -1,21 +1,20 @@
 #ifndef WINTER_SPRITE_COMPONENT_H
 #define WINTER_SPRITE_COMPONENT_H
 
-#include "component.h"
-#include "sprite.h"
-#include "shader_program.h"
-#include "mesh.h"
+#include "Sprite.h"
+#include "ShaderProgram.h"
+#include "Mesh.h"
 
 namespace winter {
-    class sprite_component : public component {
+    class sprite_component {
     public:
         sprite_component();
-        void sprite(sprite sprite);
+        void sprite(Sprite sprite);
         void render(glm::mat4 model, glm::mat4 view, glm::mat4 projection);
     private:
-        winter::sprite m_sprite {nullptr, {0, 0, 0, 0}};
-        shader_program m_program;
-        mesh m_mesh;
+        winter::Sprite m_sprite {nullptr, {0, 0, 0, 0}};
+        std::shared_ptr<ShaderProgram> m_program;
+        std::unique_ptr<Mesh> m_mesh;
     };
 }
 
