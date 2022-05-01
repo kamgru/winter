@@ -4,6 +4,7 @@
 #include "Mesh.h"
 #include "ShaderProgram.h"
 #include "Texture2d.h"
+#include "Camera.h"
 
 namespace winter{
     class Renderer {
@@ -14,7 +15,8 @@ namespace winter{
                 const Texture2d& texture2D,
                 const glm::mat4& modelMatrix,
                 const glm::mat4& viewMatrix,
-                const glm::mat4& projectionMatrix);
+                const glm::mat4& projectionMatrix,
+                const Camera& camera);
     };
 
 }

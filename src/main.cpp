@@ -93,14 +93,14 @@ int main() {
 
     auto cube = winter::Mesh::createCube();
     glm::mat4 cubeModelMatrix(1.0f);
-    cubeModelMatrix = glm::translate(cubeModelMatrix, glm::vec3(0.0f, 0.0f, 0.0f));
+    cubeModelMatrix = glm::translate(cubeModelMatrix, glm::vec3(0.0f, 3.0f, 0.0f));
     cubeModelMatrix = glm::scale(cubeModelMatrix, glm::vec3(2.0f, 2.0f, 2.0f));
 
     auto floorMesh = winter::Mesh::createQuad();
     glm::mat4 floorModelMatrix(1.0f);
     floorModelMatrix = glm::translate(floorModelMatrix, glm::vec3(0.0f, -3.0f, 0.0f));
-    floorModelMatrix = glm::rotate(floorModelMatrix, glm::radians(90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    floorModelMatrix = glm::scale(floorModelMatrix, glm::vec3(10.0f, 10.0f, 10.0f));
+    floorModelMatrix = glm::rotate(floorModelMatrix, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    floorModelMatrix = glm::scale(floorModelMatrix, glm::vec3(10.0f, 10.0f, 1.0f));
 
     winter::Renderer renderer;
 
@@ -131,7 +131,8 @@ int main() {
                 *texture,
                 cubeModelMatrix,
                 camera.GetViewMatrix(),
-                camera.GetProjectionMatrix());
+                camera.GetProjectionMatrix(),
+                camera);
 
         renderer.Render(
                 *floorMesh,
@@ -139,7 +140,8 @@ int main() {
                 *texture,
                 floorModelMatrix,
                 camera.GetViewMatrix(),
-                camera.GetProjectionMatrix());
+                camera.GetProjectionMatrix(),
+                camera);
 
         window.SwapBuffers();
         glfwPollEvents();

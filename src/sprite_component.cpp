@@ -11,13 +11,13 @@ void winter::sprite_component::render(glm::mat4 model, glm::mat4 view, glm::mat4
         return;
     }
 
-    renderer.Render(
-            *m_mesh,
-            *m_program,
-            *m_sprite.getTexture(),
-            model,
-            view,
-            projection);
+//    renderer.Render(
+//            *m_mesh,
+//            *m_program,
+//            *m_sprite.getTexture(),
+//            model,
+//            view,
+//            projection);
 }
 
 sprite_component::sprite_component() {
