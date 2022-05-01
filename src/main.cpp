@@ -88,7 +88,7 @@ int main() {
     winter::Camera camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     auto shaderProgram = winter::ShaderProgram::loadFromFile(
-            "../assets/shaders/diffuse.vert",
+            "../assets/shaders/default.vert",
             "../assets/shaders/diffuse.frag");
 
     auto cube = winter::Mesh::createCube();

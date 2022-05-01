@@ -20,12 +20,12 @@ void winter::Renderer::Render(const winter::Mesh &mesh,
     glBindTexture(GL_TEXTURE_2D, texture2D.getTextureId());
 
     shaderProgram.use();
-    shaderProgram.SetUniformMatrix4("u_model", modelMatrix);
-    shaderProgram.SetUniformMatrix3("u_normal", calculateNormalMatrix(modelMatrix));
-    shaderProgram.SetUniformMatrix4("u_view", viewMatrix);
-    shaderProgram.SetUniformMatrix4("u_projection", projectionMatrix);
-    shaderProgram.SetUniformVector3("u_lightpos", glm::vec3(5.0f, 3.0f, 0.0f));
-    shaderProgram.SetUniformVector3("u_campos", camera.GetPosition());
+    shaderProgram.SetUniformMatrix4("u_modelMatrix", modelMatrix);
+    shaderProgram.SetUniformMatrix3("u_normalMatrix", calculateNormalMatrix(modelMatrix));
+    shaderProgram.SetUniformMatrix4("u_viewMatrix", viewMatrix);
+    shaderProgram.SetUniformMatrix4("u_projectionMatrix", projectionMatrix);
+    shaderProgram.SetUniformVector3("u_lightPosition", glm::vec3(5.0f, 3.0f, 0.0f));
+    shaderProgram.SetUniformVector3("u_cameraPosition", camera.GetPosition());
 
     glBindVertexArray(mesh.getVertexArrayObjectId());
     glDrawElements(GL_TRIANGLES, mesh.getIndexCount(), GL_UNSIGNED_INT, nullptr);
