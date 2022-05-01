@@ -77,10 +77,28 @@ std::unique_ptr<Mesh> Mesh::createCube() {
             /*7*/{ glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
 
             //left
-            /*0*/{ glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(1.0f, 0.0f)},
-            /*3*/{ glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},
-            /*6*/{ glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},
-            /*5*/{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
+            /*0(8)*/{ glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},
+            /*3(9)*/{ glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec2(0.0f, 1.0f)},
+            /*6(10)*/{ glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
+            /*5(11)*/{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},
+
+            //right
+            /*1(12)*/{ glm::vec3(0.5f, -0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},
+            /*4(13)*/{ glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(0.0f, 1.0f)},
+            /*7(14)*/{ glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
+            /*2(15)*/{ glm::vec3(0.5f, 0.5f, 0.5f), glm::vec2(1.0f, 0.0f)},
+
+            //top
+            /*3(16)*/{ glm::vec3(-0.5f, 0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},
+            /*2(17)*/{ glm::vec3(0.5f, 0.5f, 0.5f), glm::vec2(0.0f, 1.0f)},
+            /*7(18)*/{ glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
+            /*6(19)*/{ glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},
+
+            //bottom
+            /*1(20)*/{ glm::vec3(0.5f, -0.5f, 0.5f), glm::vec2(0.0f, 0.0f)},
+            /*0(21)*/{ glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(0.0f, 1.0f)},
+            /*5(22)*/{ glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 1.0f)},
+            /*4(23)*/{ glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f, 0.0f)},
 
     };
 
@@ -90,7 +108,14 @@ std::unique_ptr<Mesh> Mesh::createCube() {
             //back
             4, 5, 6, 6, 7, 4,
             //left
-            0, 3, 6, 6, 5, 0};
+            8, 9, 10, 10, 11, 8,
+            // right
+            12, 13, 14, 14, 15, 12,
+            //top
+            16, 17, 18, 18, 19, 16,
+            //bottom
+            20, 21, 22, 22, 23, 20
+    };
 
     return std::make_unique<Mesh>(vertices, indices);
 }

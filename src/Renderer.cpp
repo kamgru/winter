@@ -8,6 +8,7 @@ void winter::Renderer::Render(const winter::Mesh &mesh,
                               const glm::mat4& viewMatrix,
                               const glm::mat4& projectionMatrix) {
     glEnable(GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture2D.getTextureId());
 

@@ -10,12 +10,6 @@
 #include "Renderer.h"
 #include <chrono>
 
-glm::vec2 RotateVector2(glm::vec2 vector, float angleRadians){
-    auto targetX = vector.x * glm::cos(angleRadians) - vector.y * glm::sin(angleRadians);
-    auto targetY = vector.x * glm::sin(angleRadians) + vector.y * glm::cos(angleRadians);
-    return {targetX, targetY};
-}
-
 const float WINDOW_WIDTH = 800.0f;
 const float WINDOW_HEIGHT = 600.0f;
 
@@ -60,7 +54,7 @@ void HandleCameraInput(float elapsed, winter::Window* window, winter::Camera *ca
     camera->SetPosition(cameraPosition);
 
     float pitch = 0.0f;
-    float yaw = 0.0f;
+    float yaw = -90.0f;
 
     glm::vec2 windowSize = window->GetSize();
     float previousX =  windowSize.x / 2.0f;
@@ -90,7 +84,7 @@ int main() {
     winter::Window window(WINDOW_WIDTH, WINDOW_HEIGHT, "winter");
     window.Create();
 
-    std::shared_ptr<winter::Texture2d> texture = winter::Texture2d::loadFromFile("../assets/textures/quad_debug.png");
+    std::shared_ptr<winter::Texture2d> texture = winter::Texture2d::loadFromFile("../assets/textures/wall.jpg");
     winter::Camera camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     auto shaderProgram = winter::ShaderProgram::loadFromFile(
@@ -114,6 +108,7 @@ int main() {
     auto dt = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start);
 
     glfwSetInputMode(window.GetGlfwWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSetCursorPos(window.GetGlfwWindow(), WINDOW_WIDTH / 2.0f, WINDOW_HEIGHT / 2.0f);
 
     while(!window.ShouldClose()){
 
@@ -122,19 +117,11 @@ int main() {
         float elapsed = (dt.count() / 60.0f);
 
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         cubeModelMatrix = glm::rotate(cubeModelMatrix, .05f * elapsed, glm::vec3(0, 1, 0));
 
         HandleCameraInput(elapsed, &window, &camera);
-
-//        if (glfwGetWindowAttrib(window.GetGlfwWindow(), GLFW_HOVERED)) {
-//            double mx, my;
-//            glfwGetCursorPos(window.GetGlfwWindow(), &mx, &my);
-//            mx = glm::clamp(mx, 0.0, 800.0);
-//            my = glm::clamp(my, 0.0, 600.0);
-//            std::cout << mx << ":" << my << std::endl;
-//        }
 
         camera.Update();
 
