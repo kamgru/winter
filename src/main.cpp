@@ -33,12 +33,12 @@ void HandleCameraInput(float elapsed, winter::Window* window, winter::Camera *ca
 
     int moveForward = glfwGetKey(window->GetGlfwWindow(), GLFW_KEY_W);
     if (moveForward == GLFW_PRESS){
-        cameraPosition += glm::vec3(cameraForward.x, 0, cameraForward.z) * cameraSpeed * elapsed;
+        cameraPosition += glm::normalize(glm::vec3(cameraForward.x, 0, cameraForward.z)) * cameraSpeed * elapsed;
     }
 
     int moveBackward = glfwGetKey(window->GetGlfwWindow(), GLFW_KEY_S);
     if (moveBackward == GLFW_PRESS){
-        cameraPosition -= glm::vec3(cameraForward.x, 0, cameraForward.z) * cameraSpeed * elapsed;
+        cameraPosition -= glm::normalize(glm::vec3(cameraForward.x, 0, cameraForward.z)) * cameraSpeed * elapsed;
     }
 
     int moveUp = glfwGetKey(window->GetGlfwWindow(), GLFW_KEY_SPACE);

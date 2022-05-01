@@ -23,7 +23,7 @@ void winter::Renderer::Render(const winter::Mesh &mesh,
     shaderProgram.SetUniformMatrix3("u_normal", calculateNormalMatrix(modelMatrix));
     shaderProgram.SetUniformMatrix4("u_view", viewMatrix);
     shaderProgram.SetUniformMatrix4("u_projection", projectionMatrix);
-    shaderProgram.SetUniformVector3("u_lightpos", glm::vec3(2.0f, 2.0f, 0.0f));
+    shaderProgram.SetUniformVector3("u_lightpos", glm::vec3(15.0f, 10.0f, 10.0f));
     glBindVertexArray(mesh.getVertexArrayObjectId());
     glDrawElements(GL_TRIANGLES, mesh.getIndexCount(), GL_UNSIGNED_INT, nullptr);
 }
