@@ -2,8 +2,8 @@
 
 in vec2 uv;
 out vec4 col;
-uniform sampler2D _mainTex;
+uniform sampler2D u_mainTex;
 
 void main() {
-    col = texture(_mainTex, uv);
+    col = texture(u_mainTex, uv);
 }

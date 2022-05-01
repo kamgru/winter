@@ -88,8 +88,8 @@ int main() {
     winter::Camera camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     auto shaderProgram = winter::ShaderProgram::loadFromFile(
-            "../assets/shaders/unlit.vert",
-            "../assets/shaders/unlit.frag");
+            "../assets/shaders/diffuse.vert",
+            "../assets/shaders/diffuse.frag");
 
     auto cube = winter::Mesh::createCube();
     glm::mat4 cubeModelMatrix(1.0f);

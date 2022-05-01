@@ -9,7 +9,6 @@ typedef unsigned int ShaderId;
 
 const int INFO_LOG_BUFFER_SIZE = 512;
 char info_log[INFO_LOG_BUFFER_SIZE];
-const char* MAIN_TEX_UNIFORM_NAME = "_mainTex";
 
 ShaderProgram::ShaderProgram(ShaderProgramId shaderProgramId):
     _shaderProgramId(shaderProgramId) {}
@@ -35,7 +34,28 @@ void ShaderProgram::use() const {
     glUseProgram(_shaderProgramId);
 }
 
-void ShaderProgram::SetUniformMatrix(const std::string& name, glm::mat4 mat) const {
+void ShaderProgram::SetUniformVector3(const std::string &name, glm::vec3 vec) const {
+    int location = glGetUniformLocation(_shaderProgramId, name.c_str());
+    if (location >= 0){
+        glUniform3f(location, vec.x, vec.y, vec.z);
+    }
+    else {
+        std::cout << "Error, uniform " << name << " not found" << std::endl;
+    }
+}
+
+void ShaderProgram::SetUniformMatrix3(const std::string& name, glm::mat3 mat) const {
+    int location = glGetUniformLocation(_shaderProgramId, name.c_str());
+    if (location >= 0){
+        glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(mat));
+    }
+    else{
+        std::cout << "Error, uniform " << name << " not found" << std::endl;
+    }
+}
+
+
+void ShaderProgram::SetUniformMatrix4(const std::string& name, glm::mat4 mat) const {
     int location = glGetUniformLocation(_shaderProgramId, name.c_str());
     if (location >= 0){
         glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(mat));
@@ -75,8 +95,9 @@ std::unique_ptr<ShaderProgram> ShaderProgram::loadFromFile(const std::string &ve
     glDeleteShader(fragmentShaderId);
 
     //this is specifically for fragment shader; sets the getTexture uniform location
-    int loc = glGetUniformLocation(shaderProgramId, MAIN_TEX_UNIFORM_NAME);
-    glUniform1i(loc, 0);
+    int textureLocation = glGetUniformLocation(shaderProgramId, "u_mainTex");
+    glUniform1i(textureLocation, 0);
 
     return std::make_unique<ShaderProgram>(shaderProgramId);
 }
+

@@ -32,7 +32,7 @@ void sprite_component::sprite(winter::Sprite sprite) {
     m_sprite = sprite;
 
     rect uv_rect = m_sprite.getUvRect();
-    std::vector<vertex> vertices2 = m_mesh->getVertices();
+    std::vector<vertex> vertices2 = m_mesh->GetVertices();
 
     vertices2.at(0).uv = glm::vec2(uv_rect.x + uv_rect.w, uv_rect.y + uv_rect.h);
     vertices2.at(1).uv = glm::vec2(uv_rect.x + uv_rect.w, uv_rect.y);

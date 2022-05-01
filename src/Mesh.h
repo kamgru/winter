@@ -14,14 +14,19 @@ namespace winter {
 
     struct vertex{
         glm::vec3 position;
+        glm::vec3 normal;
         glm::vec2 uv;
 
-        static void* pos_ptr() {
+        static void* GetPositionPointer() {
             return nullptr;
         }
 
-        static void* uv_ptr() {
+        static void* GetNormalPointer() {
             return (void*)sizeof(position);
+        }
+
+        static void* GetUvPointer() {
+            return (void*)(sizeof(position) + sizeof(normal));
         }
     };
 
@@ -30,7 +35,7 @@ namespace winter {
         Mesh(std::vector<vertex> vertices, std::vector<unsigned int> indices);
         ~Mesh();
 
-        std::vector<vertex> getVertices() const { return _vertices; }
+        std::vector<vertex> GetVertices() const { return _vertices; }
         void setVertices(std::vector<vertex> vertices);
         int getIndexCount() const {return (int)_indices.size(); }
         void setIndices(std::vector<unsigned int> indices);
